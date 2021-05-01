@@ -1,0 +1,7 @@
+go here: https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html
+
+copy download link
+
+find nexturl=..
+
+in that urn change /otn/ to /otn-pub/
