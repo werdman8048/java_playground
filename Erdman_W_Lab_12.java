@@ -1,3 +1,4 @@
+//sliders and buttons have been added in a second window but are not yet functional, I just want to turn this in, my understanding is that lab 13 will start with this code
 import javafx.application.*;
 import javafx.stage.*;
 import javafx.scene.*;
