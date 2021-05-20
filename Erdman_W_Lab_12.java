@@ -5,6 +5,8 @@ import javafx.event.*;
 import javafx.scene.layout.*;
 import javafx.scene.shape.*;
 import javafx.scene.paint.*;
+import javafx.scene.control.*;//sliders
+import javafx.geometry.*;//for sliders
 import javafx.animation.*;
 import javafx.util.*;
 import java.util.*;
@@ -36,8 +38,8 @@ class Ball extends Circle {
 
     //Randomly set the x_speed and the y_speed to some number between 1 and 5
     Random rand = new Random();
-    this.x_speed = Math.random()*4 + 1;
-    this.y_speed = Math.random()*4 + 1;
+    this.y_speed = (Math.random()*4 + 1);
+    this.x_speed = (Math.random()*4 + 1);
 
     //System.out.println("X SPEED: " + x_speed);
     //System.out.println("Y SPEED: " + y_speed);//dont need to print these anymore
@@ -105,15 +107,35 @@ public class Erdman_W_Lab_12 extends Application {
   Ball myball;
 
   public void start(final Stage primaryStage) {
-    ArrayList<Ball> myballs = new ArrayList<Ball>();//it legit took me 6 hours to realize I had to use an arraylist. actually i had thought about it earlier but didn't expect it to work. 
 
+    //SLIDERS AND BUTTONS:
+    FlowPane rootSupport = new FlowPane();
+    Slider ball_slider = new Slider(0.1, 10, 1);//same as below
+    Slider speed_slider = new Slider(0.1, 10, 1);//hardcoded: 1/10 speed min, 10x speed max, 1x (default)
+    //speed_slider.setFill(Color.BLACK); couldnt figure this out but looks like i need to use css to change colors?
+    //speed_slider.setAlignment(Pos.RIGHT); nor this
+    speed_slider.setOrientation(Orientation.VERTICAL);
+
+    Button btnReset = new Button("Reset");
+
+    rootSupport.getChildren().addAll(speed_slider, ball_slider, btnReset);
+
+    Scene sceneSupport = new Scene(rootSupport, 200, 150);
+    Stage settingStage = new Stage();
+
+    settingStage.setTitle("Setting Screen");
+    settingStage.setScene(sceneSupport);
+    settingStage.show();//now 2 windows appear, on top of each other though, dont wanna fix rn, its 2am
+
+
+    //BALLS:
+    ArrayList<Ball> myballs = new ArrayList<Ball>();//it legit took me 6 hours to realize I had to use an arraylist. actually i had thought about it earlier but didn't expect it to work. 
     FlowPane root = new FlowPane();
     Pane pane = new Pane();
     root.getChildren().add(pane);
     
-    //i liked more balls so I've changed it. to fit the instuctions PERFECTLY it would be *40+10
+    //i liked more balls so I've changed it. to fit the instuctions PERFECTLY it would be *40+10 this is 30 to 60 balls
     double numOfBalls = (Math.random()*30+30);//ideally would be int, but cant be bothered to change it as it works
-    System.out.println(numOfBalls);
     
     for (int i = 0; i < numOfBalls; i++) {
       myball = new Ball(BALL_SIZE, WIDTH, HEIGHT);
@@ -122,7 +144,7 @@ public class Erdman_W_Lab_12 extends Application {
     }
 
     Scene scene = new Scene(root, WIDTH, HEIGHT);
-    primaryStage.setTitle("Balls ;)");
+    primaryStage.setTitle("Bouncy Balls");
     primaryStage.setScene(scene);
     primaryStage.show();
 
